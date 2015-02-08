@@ -25,6 +25,9 @@
 #ifndef _ENKI_TESTCASE_H
 #define _ENKI_TESTCASE_H
 
+#define ENKI_VERSION_MAJOR 0
+#define ENKI_VERSION_MINOR 1
+
 #include <iostream>
 #include <fstream>
 #include <list>
