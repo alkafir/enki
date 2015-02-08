@@ -1,0 +1,9 @@
+*.log
+*.exe
+*.obj
+*.o
+*.bin
+samples/old
+*.tar
+*.gz
+*.zip
