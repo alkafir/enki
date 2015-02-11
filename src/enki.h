@@ -388,6 +388,85 @@ namespace enki {
     private:
       std::ofstream ofstream; /* The file output stream */
   };
+
+  template<typename T> class XMLStreamResultExporter: public StreamResultExporter<T> {
+    public:
+      XMLStreamResultExporter(std::ostream& ostream, bool export_time = false): StreamResultExporter<T>(ostream, export_time) {
+        /* Export XML header */
+        this->get_output_stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<test-results>\n";
+      }
+
+      virtual ~XMLStreamResultExporter() {
+        /* Export XML footer */
+        this->get_output_stream() << "</test-results>" << std::endl;
+      }
+
+      virtual void export_result(typename TestCase<T>::TestData& data) {
+        auto& os = this->get_output_stream();
+
+        os << "\t\t<test result=\"" << (data.passed? "passed": "failed") << "\"";
+
+        if(this->is_duration_exported())
+          os << " duration=\"" << data.time << "\"";
+
+        os << " name=\"" << data.name << "\"/>" << std::endl;
+      }
+
+      /*
+       * Exports the results in XML format.
+       *
+       * tcase: The testcase to export the data of
+       */
+      virtual void export_results(TestCase<T>& tcase) {
+        typedef typename std::list<typename TestCase<T>::TestData>::iterator qiterator;
+        auto& os = this->get_output_stream();
+
+        /* Testcase header */
+        os << "\t<test-case>\n";
+
+        /* Data */
+        for(qiterator it = tcase.get_data().begin(); it != tcase.get_data().end(); it++)
+          this->export_result(*it);
+
+        /* Testcase footer */
+        os << "\t</test-case>\n";
+      }
+  };
+
+  template<typename T> class XMLFileResultExporter: public ResultExporter<T> {
+    public:
+    /*
+     * Initializes a new instance of this class.
+     *
+     * fname: The file name
+     * export_time: True to also export duration information
+     */
+    XMLFileResultExporter(const char* fname, bool export_time = false): ofstream(fname), ResultExporter<T>(export_time) {
+      exp = new XMLStreamResultExporter<T>(ofstream, export_time);
+    }
+
+    virtual ~XMLFileResultExporter() {
+      delete exp;
+    }
+
+    virtual void export_results(TestCase<T> tcase) {
+      exp->export_results(tcase);
+    }
+
+    /*
+     * The general contract for this method is to export the information for
+     * a single test.
+     *
+     * data: The test data structure to export
+     * */
+    virtual void export_result(typename TestCase<T>::TestData& data) {
+      exp->export_result(data);
+    }
+
+    private:
+      std::ofstream ofstream; /* The file output stream */
+      XMLStreamResultExporter<T>* exp;
+  };
 }
 
 #endif /* _ENKI_TESTCASE_H */

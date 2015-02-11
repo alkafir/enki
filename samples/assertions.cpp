@@ -71,8 +71,12 @@ int main(int argc, char** argv) {
   ConsoleResultExporter<AssertTestCase> exp(true);
   exp.export_results(tcase);
 
-  /* TextFileResultExporter<AssertTestCase> exp2(__BASE_FILE__ ".log", true);
-   * exp2.export_results(tcase);
-   */
+  // TextFileResultExporter<AssertTestCase> exp2(__BASE_FILE__ ".log", true);
+  // exp2.export_results(tcase);
+  
+
+  // XMLFileResultExporter<AssertTestCase> exp3(__BASE_FILE__ ".xml", true);
+  // exp3.export_results(tcase);
+
   return ret;
 }
