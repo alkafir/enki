@@ -389,8 +389,21 @@ namespace enki {
       std::ofstream ofstream; /* The file output stream */
   };
 
+  /*
+   * XML stream result exporter.
+   *
+   * This class exports the test data to a text stream in XML format.
+   *
+   * T: The type of test case to export
+   */
   template<typename T> class XMLStreamResultExporter: public StreamResultExporter<T> {
     public:
+      /*
+       * Initializes a new instance of this class.
+       *
+       * ostream: The stream to export the data to
+       * export_time: True to also export the test duration data
+       */
       XMLStreamResultExporter(std::ostream& ostream, bool export_time = false): StreamResultExporter<T>(ostream, export_time) {
         /* Export XML header */
         this->get_output_stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<test-results>\n";
@@ -401,6 +414,9 @@ namespace enki {
         this->get_output_stream() << "</test-results>" << std::endl;
       }
 
+      /*
+       * See ResultExporter::export_result()
+       */
       virtual void export_result(typename TestCase<T>::TestData& data) {
         auto& os = this->get_output_stream();
 
@@ -433,6 +449,13 @@ namespace enki {
       }
   };
 
+  /*
+   * XML file result exporter.
+   *
+   * This class exports the test data to a text file in XML format.
+   *
+   * T: The type of test case to export
+   */
   template<typename T> class XMLFileResultExporter: public ResultExporter<T> {
     public:
     /*
@@ -449,6 +472,9 @@ namespace enki {
       delete exp;
     }
 
+    /*
+     * See ResultExporter::export_results()
+     */
     virtual void export_results(TestCase<T> tcase) {
       exp->export_results(tcase);
     }
@@ -465,7 +491,7 @@ namespace enki {
 
     private:
       std::ofstream ofstream; /* The file output stream */
-      XMLStreamResultExporter<T>* exp;
+      XMLStreamResultExporter<T>* exp; /* The XML stream exporter */
   };
 }
 
