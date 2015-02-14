@@ -27,7 +27,7 @@
 
 #define ENKI_VERSION_MAJOR 0
 #define ENKI_VERSION_MINOR 1
-#define ENKI_VERSION_PATCH 1
+#define ENKI_VERSION_PATCH 2
 
 #include <iostream>
 #include <fstream>
@@ -215,7 +215,7 @@ namespace enki {
 
         cleanup();
 
-        return err;
+        return !err;
       }
 
       /*
