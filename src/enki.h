@@ -27,6 +27,7 @@
 
 #define ENKI_VERSION_MAJOR 0
 #define ENKI_VERSION_MINOR 1
+#define ENKI_VERSION_PATCH 1
 
 #include <iostream>
 #include <fstream>
@@ -107,7 +108,7 @@ namespace enki {
        *
        * T: The domain type of both arrays
        */
-      template<typename T> static void assert_array_equals(T* a, size_t len_a, T* b, size_t len_b) {
+      template<typename T> static void assert_array_equals(const T* a, size_t len_a, const T* b, size_t len_b) {
         assert(len_a == len_b);
         
         for(size_t t = 0; t < len_a; t++)
