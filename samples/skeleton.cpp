@@ -1,5 +1,5 @@
 #include <iostream>
-#include "..\src\enki.h"
+#include "../src/enki.h"
 
 using namespace std;
 using namespace enki;
@@ -7,10 +7,10 @@ using namespace enki;
 class SkeletonTestCase : public TestCase<SkeletonTestCase> {
   public:
     SkeletonTestCase(): TestCase() {
-      add(testPass, "Test pass 1");
-      add(testFailed, "Test fail 1");
-      add(testPass, "Test pass 2");
-      add(testEmpty, "Test empty");
+      add(&SkeletonTestCase::testPass, "Test pass 1");
+      add(&SkeletonTestCase::testFailed, "Test fail 1");
+      add(&SkeletonTestCase::testPass, "Test pass 2");
+      add(&SkeletonTestCase::testEmpty, "Test empty");
     }
 
   void testPass() {

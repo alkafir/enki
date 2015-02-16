@@ -7,13 +7,13 @@ using namespace enki;
 class AssertTestCase : public TestCase<AssertTestCase> {
   public:
     AssertTestCase() {
-      add(test_assert, "Assert::assert()");
-      add(test_assert_exception, "Assert::assert_exception()");
-      add(test_assert_array_equals_pass, "Assert::assert_array_equals() pass");
-      add(test_assert_array_equals_fail, "Assert::assert_array_equals() fail");
-      add(test_assert_array_subdomain_pass, "Assert::assert_array_subdomain() pass");
-      add(test_assert_array_subdomain_fail, "Assert::assert_array_subdomain() fail");
-      add(test_wait_1s, "Timing test, 666ms ");
+      add(&AssertTestCase::test_assert, "Assert::assert()");
+      add(&AssertTestCase::test_assert_exception, "Assert::assert_exception()");
+      add(&AssertTestCase::test_assert_array_equals_pass, "Assert::assert_array_equals() pass");
+      add(&AssertTestCase::test_assert_array_equals_fail, "Assert::assert_array_equals() fail");
+      add(&AssertTestCase::test_assert_array_subdomain_pass, "Assert::assert_array_subdomain() pass");
+      add(&AssertTestCase::test_assert_array_subdomain_fail, "Assert::assert_array_subdomain() fail");
+      add(&AssertTestCase::test_wait_1s, "Timing test, 666ms ");
     }
 
     void test_assert() {
