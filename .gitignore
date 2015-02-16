@@ -3,8 +3,7 @@
 *.exe
 *.obj
 *.o
-*.bin
-samples/old
+*.out
 *.tar
 *.gz
 *.zip
