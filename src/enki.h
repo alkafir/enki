@@ -37,9 +37,9 @@
 #include <chrono>
 
 #if !defined(ENKI_STYLE_NOCOLORS) && !defined(__WIN32)
-  #define ENKI_STYLE_PASSED "\33[32m;" 
-  #define ENKI_STYLE_FAILED "\33[31m;"
-  #define ENKI_STYLE_DEFAULT "\33[0m;"
+  #define ENKI_STYLE_PASSED "\33[32m" 
+  #define ENKI_STYLE_FAILED "\33[31m"
+  #define ENKI_STYLE_DEFAULT "\33[0m"
   #define ENKI_STR_PASSED "PASSED"
   #define ENKI_STR_FAILED "FAILED"
 #else
